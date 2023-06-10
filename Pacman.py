@@ -1,7 +1,7 @@
 import pygame
 import random
 import sys
-#from pac1 import *
+from clase_pacman import *
 #from pac2 import *
 
 
@@ -60,5 +60,43 @@ class Game:
     def pausa_nivelsuperado(self):
         pass
     
+    def update(self):
+        self.lista_sprites_adibujar.update()
+        
+        
+        pygame.display.flip()
+        self.reloj.tick(self.FPS)
     
+    def draw(self):
+        self.pantalla.fill(self.GRIS_FONDO)
+        
+        self.lista_sprites_adibujar.draw(self.pantalla)
     
+    def check_si_instancia_otro_pacman(self):
+        pass
+    
+    def check_event(self):
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type==pygame.KEYDOWN and self.gameover:
+                if pygame.K_KP_ENTER:
+                    self.gameover=False
+                    self.new_game()
+                    self.run()
+            elif not self.gameover:
+                self.pacman.leer_teclado()
+    def  run(self):
+        while not self.gameover:
+            self.check_event()
+            self.update()
+            self.draw()
+        while self.gameover:
+            self.update()
+            self.draw()
+            self.check_event()
+            
+if __name__=='__main__':
+    game=Game()#Instanciamos la clase, es decir creamos el objeto
+    game.run()
