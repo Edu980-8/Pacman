@@ -21,7 +21,25 @@ class PacMan(pygame.sprite.Sprite):
         self.orientacion = 1 # A la derecha por defecto
         
         self.orientacion_max = self.orientacion + 6
-        self.vel_x=2 # Si se mueve ene x no se debe mover en y porq iria en diagonal.
+        self.vel_x=2 # Si se mueve en x no se debe mover en y porq iria en diagonal.
         self.vel_y=0
         
+        self.ultimo_update = pygame.time.get_ticks()
+        self.fotograma_vel = 50 # Velocidad de la animacion
+        
+    def update(self):  
+        calculo = pygame.time.get_ticks()
+        if calculo - self.ultimo_update > self.fotograma_vel:
+            self.ultimo_update = calculo
+            self.orientacion += 1 
+            if self.orientacion >= self.orientacion_max:
+                self.orientacion = self.orientacion_max-6
+                
+            centerx = self.rect.centerx
+            centery = self.rect.centery
+            self.image = self.enemigos_anima[self.orientacion]
+            self.rect = self.image.get_rect()
+            
+            self.rect.centerx = centerx
+            self.rect.centery = centery
         
