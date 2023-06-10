@@ -46,13 +46,16 @@ class Game:
         
         self.crearPantalla()
         
-    def crearPantalla():
+    def crearPantalla(self):
         pass
     
     def new_game(self):
         self.puntos_inicio = 0
         self.nivel = 1
         self.vidas = 3
+        self.pacman = PacMan(self,25,25)
+        self.lista_sprites_adibujar.add(self.pacman)
+        
         
     def validar_nivelsuperado(self):
         pass

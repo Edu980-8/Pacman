@@ -7,7 +7,7 @@ class PacMan(pygame.sprite.Sprite):
         
         self.enemigos_anima = []
         
-        for i in range(25): #Cargue de los 25 pacmans
+        for i in range(7): #Cargue de los 25 pacmans
             file = f'pacman{i}.png'
             img = pygame.image.load(file).convert()
             img.set_colorkey((255,255,255))
@@ -42,4 +42,15 @@ class PacMan(pygame.sprite.Sprite):
             
             self.rect.centerx = centerx
             self.rect.centery = centery
+            
+    def leer_teclado(self):
+        tecla = pygame.key.get_pressed()
         
+        if tecla[pygame.K_LEFT]:
+            self.pulsada='left'
+        elif tecla[pygame.K_RIGHT]:
+            self.pulsada='right'
+        elif tecla[pygame.K_DOWN]:
+            self.pulsada='down'
+        elif tecla[pygame.K_UP]:
+            self.pulsada='up'
